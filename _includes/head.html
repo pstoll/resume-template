@@ -7,7 +7,40 @@
 
   <!-- Google font typography settings - defined in _config.yml -->
   {% if site.resume_theme == 'default' %}
-  <link href='https://fonts.googleapis.com/css?family=Palatino:300,400,600,700|Open+Sans:400,300,700,600' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Palatino:300,400,600,700|Open+Sans:400,300,700,600' rel='stylesheet' type='text/css'>
+  {% endif %}
+
+  {% if site.resume_ga_tracking_id %}
+  <!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{site.resume_ga_tracking_id}}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+  gtag('config', '{{site.resume_ga_tracking_id}}');
+</script>
+
+  {% if site.resume_ga_track_print %}
+<!-- let's track printing events. -->
+<script type="text/javascript">
+try{
+ (function() {
+   var afterPrint = function() {
+       gtag('event', 'print_intent', {'page': document.location.pathname}); // gtag GA
+   };
+   if (window.matchMedia) {
+      var mql = window.matchMedia('print');
+      mql.addListener(function(m) {
+      if (!m.matches)
+        afterPrint();
+      });
+    }
+   window.onafterprint = afterPrint;
+  }());
+} catch(e) {}
+</script>
+  {% endif %}
+
   {% endif %}
 
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
