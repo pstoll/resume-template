@@ -17,8 +17,8 @@ function doit() {
 scp $tgz "${SSHTARGET}:${TOPDIR}/"
 doit "cd ${TOPDIR} && tar -zxvhf $tgz && rm -rf ${RESUMEDIR} && ln -s $dir ${RESUMEDIR}"
 
-echo $dir > latest-uploaded.txt
-scp latest-uploaded.txt "${SSHTARGET}:${TOPDIR}/${RDIR}/latest.txt"
+echo $dir > tools/latest-uploaded.txt
+scp tools/latest-uploaded.txt "${SSHTARGET}:${TOPDIR}/${RDIR}/latest.txt"
 
 
 
